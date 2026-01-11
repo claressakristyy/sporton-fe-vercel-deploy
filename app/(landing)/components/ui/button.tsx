@@ -10,8 +10,8 @@ const Button = ({children, className, variant = "primary", size = "normal", ...p
 
     const variants = {
         primary: 'bg-orange-500 text-white hover:bg-primary/85',
-        dark: 'bg-dark text-white hover:bg-dark/85',
-        ghost: 'bg-transparent hover:bg-gray-100 text-dark',
+        dark: 'bg-black text-white hover:bg-black/85',
+        ghost: 'bg-transparent hover:bg-gray-100 text-black',
     };
 
     const sizes = {
