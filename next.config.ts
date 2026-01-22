@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns:[
+    remotePatterns: [
       {
         protocol: "https",
         hostname: "be-sporton.agunacourse.com",
@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  
 };
 
 export default nextConfig;

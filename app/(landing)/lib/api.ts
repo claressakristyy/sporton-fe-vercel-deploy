@@ -8,22 +8,12 @@ export async function fetchAPI<T>(
   });
 
   if (!res.ok) {
-    const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
-    console.log(`[Fetch Error] URL: ${fullUrl}, Status: ${res.status}`);
-
     let errorMessage = `Failed to fetch data from ${endpoint}`;
     try {
-      const text = await res.text();
-      console.log(`[Fetch Error] Response Body: ${text}`);
-      try {
-        const errorData = JSON.parse(text);
-        errorMessage = errorData.message || errorData.error || errorMessage;
-      } catch {
-        // parse failed, use text if short, otherwise default
-        if (text.length < 200) errorMessage = text;
-      }
+      const errorData = await res.json();
+      errorMessage = errorData.message || errorData.error || errorMessage;
     } catch (e) {
-      console.log("[Fetch Error] Failed to read response body", e);
+      console.log(e);
     }
 
     throw new Error(errorMessage);
@@ -35,4 +25,11 @@ export async function fetchAPI<T>(
 export function getImageUrl(path: string) {
   if (path.startsWith("http")) return path; // artinya url nya sudah valid
   return `${process.env.NEXT_PUBLIC_API_ROOT}/${path}`;
+}
+
+export function getAuthHeaders() {
+  const token = localStorage.getItem("token");
+  return {
+    Authorization: `Bearer ${token}`,
+  };
 }
